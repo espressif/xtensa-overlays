@@ -23,6 +23,7 @@
 
 #define XTENSA_CONFIG_VERSION 0x60
 
+#include "defs.h"
 #include "xtensa-config.h"
 #include "xtensa-tdep.h"
 

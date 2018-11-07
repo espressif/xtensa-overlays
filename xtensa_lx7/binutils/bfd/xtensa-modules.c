@@ -8656,7 +8656,7 @@ int num_bypass_group_chunks() {
     return 0;
 }
 
-uint32 *bypass_entry(int i) {
+uint32 *bypass_entry(__attribute__((unused)) int i) {
     return 0;
 }
 
