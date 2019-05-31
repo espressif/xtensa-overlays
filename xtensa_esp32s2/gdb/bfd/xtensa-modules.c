@@ -1,6 +1,6 @@
 /* Xtensa configuration-specific ISA information.
 
-   Customer ID=13321; Build=0x76b43; Copyright (c) 2003-2018 Tensilica Inc.
+   Customer ID=14525; Build=0x787b1; Copyright (c) 2003-2018 Tensilica Inc.
 
    Permission is hereby granted, free of charge, to any person obtaining
    a copy of this software and associated documentation files (the
@@ -413,19 +413,19 @@ Field_thi3_Slot_inst_set (xtensa_insnbuf insn, uint32 val)
 }
 
 static unsigned
-Field_fld_inst_23_8_Slot_inst_get (const xtensa_insnbuf insn)
+Field_fld_inst_23_12_Slot_inst_get (const xtensa_insnbuf insn)
 {
   unsigned tie_t = 0;
-  tie_t = (tie_t << 16) | ((insn[0] << 8) >> 16);
+  tie_t = (tie_t << 12) | ((insn[0] << 8) >> 20);
   return tie_t;
 }
 
 static void
-Field_fld_inst_23_8_Slot_inst_set (xtensa_insnbuf insn, uint32 val)
+Field_fld_inst_23_12_Slot_inst_set (xtensa_insnbuf insn, uint32 val)
 {
   uint32 tie_t;
-  tie_t = (val << 16) >> 16;
-  insn[0] = (insn[0] & ~0xffff00) | (tie_t << 8);
+  tie_t = (val << 20) >> 20;
+  insn[0] = (insn[0] & ~0xfff000) | (tie_t << 12);
 }
 
 static unsigned
@@ -442,6 +442,22 @@ Field_fld_inst_3_0_Slot_inst_set (xtensa_insnbuf insn, uint32 val)
   uint32 tie_t;
   tie_t = (val << 28) >> 28;
   insn[0] = (insn[0] & ~0xf) | (tie_t << 0);
+}
+
+static unsigned
+Field_fld_inst_23_8_Slot_inst_get (const xtensa_insnbuf insn)
+{
+  unsigned tie_t = 0;
+  tie_t = (tie_t << 16) | ((insn[0] << 8) >> 16);
+  return tie_t;
+}
+
+static void
+Field_fld_inst_23_8_Slot_inst_set (xtensa_insnbuf insn, uint32 val)
+{
+  uint32 tie_t;
+  tie_t = (val << 16) >> 16;
+  insn[0] = (insn[0] & ~0xffff00) | (tie_t << 8);
 }
 
 static unsigned
@@ -1258,6 +1274,70 @@ Field_xt_wbr18_imm_Slot_inst_set (xtensa_insnbuf insn, uint32 val)
 }
 
 static unsigned
+Field_fld_wr_mask_gpio_out_mask_Slot_inst_get (const xtensa_insnbuf insn)
+{
+  unsigned tie_t = 0;
+  tie_t = (tie_t << 4) | ((insn[0] << 24) >> 28);
+  return tie_t;
+}
+
+static void
+Field_fld_wr_mask_gpio_out_mask_Slot_inst_set (xtensa_insnbuf insn, uint32 val)
+{
+  uint32 tie_t;
+  tie_t = (val << 28) >> 28;
+  insn[0] = (insn[0] & ~0xf0) | (tie_t << 4);
+}
+
+static unsigned
+Field_fld_wr_mask_gpio_out_value_Slot_inst_get (const xtensa_insnbuf insn)
+{
+  unsigned tie_t = 0;
+  tie_t = (tie_t << 4) | ((insn[0] << 20) >> 28);
+  return tie_t;
+}
+
+static void
+Field_fld_wr_mask_gpio_out_value_Slot_inst_set (xtensa_insnbuf insn, uint32 val)
+{
+  uint32 tie_t;
+  tie_t = (val << 28) >> 28;
+  insn[0] = (insn[0] & ~0xf00) | (tie_t << 8);
+}
+
+static unsigned
+Field_fld_set_bit_gpio_out_mask_Slot_inst_get (const xtensa_insnbuf insn)
+{
+  unsigned tie_t = 0;
+  tie_t = (tie_t << 8) | ((insn[0] << 20) >> 24);
+  return tie_t;
+}
+
+static void
+Field_fld_set_bit_gpio_out_mask_Slot_inst_set (xtensa_insnbuf insn, uint32 val)
+{
+  uint32 tie_t;
+  tie_t = (val << 24) >> 24;
+  insn[0] = (insn[0] & ~0xff0) | (tie_t << 4);
+}
+
+static unsigned
+Field_fld_clr_bit_gpio_out_mask_Slot_inst_get (const xtensa_insnbuf insn)
+{
+  unsigned tie_t = 0;
+  tie_t = (tie_t << 8) | ((insn[0] << 20) >> 24);
+  return tie_t;
+}
+
+static void
+Field_fld_clr_bit_gpio_out_mask_Slot_inst_set (xtensa_insnbuf insn, uint32 val)
+{
+  uint32 tie_t;
+  tie_t = (val << 24) >> 24;
+  insn[0] = (insn[0] & ~0xff0) | (tie_t << 4);
+}
+
+static unsigned
 Field_fld_get_gpio_in_i_Slot_inst_get (const xtensa_insnbuf insn)
 {
   unsigned tie_t = 0;
@@ -1342,7 +1422,12 @@ enum xtensa_field_id {
   FIELD_imm7,
   FIELD_xt_wbr15_imm,
   FIELD_xt_wbr18_imm,
+  FIELD_fld_WR_MASK_GPIO_OUT_mask,
+  FIELD_fld_WR_MASK_GPIO_OUT_value,
+  FIELD_fld_SET_BIT_GPIO_OUT_mask,
   FIELD_fld_Inst_3_0,
+  FIELD_fld_Inst_23_12,
+  FIELD_fld_CLR_BIT_GPIO_OUT_mask,
   FIELD_fld_Inst_23_8,
   FIELD_fld_GET_GPIO_IN_I,
   FIELD__ar0,
@@ -2256,6 +2341,28 @@ OperandSem_opnd_sem_xt_wbr18_label_encode (uint32 *valp)
 }
 
 static int
+OperandSem_opnd_sem_opnd_SET_BIT_GPIO_OUT_mask_decode (uint32 *valp)
+{
+  unsigned opnd_SET_BIT_GPIO_OUT_mask_out_0;
+  unsigned opnd_SET_BIT_GPIO_OUT_mask_in_0;
+  opnd_SET_BIT_GPIO_OUT_mask_in_0 = *valp & 0xff;
+  opnd_SET_BIT_GPIO_OUT_mask_out_0 = (0 << 8) | opnd_SET_BIT_GPIO_OUT_mask_in_0;
+  *valp = opnd_SET_BIT_GPIO_OUT_mask_out_0;
+  return 0;
+}
+
+static int
+OperandSem_opnd_sem_opnd_SET_BIT_GPIO_OUT_mask_encode (uint32 *valp)
+{
+  unsigned opnd_SET_BIT_GPIO_OUT_mask_in_0;
+  unsigned opnd_SET_BIT_GPIO_OUT_mask_out_0;
+  opnd_SET_BIT_GPIO_OUT_mask_out_0 = *valp;
+  opnd_SET_BIT_GPIO_OUT_mask_in_0 = (opnd_SET_BIT_GPIO_OUT_mask_out_0 & 0xff);
+  *valp = opnd_SET_BIT_GPIO_OUT_mask_in_0;
+  return 0;
+}
+
+static int
 Operand_soffsetx4_ator (uint32 *valp, uint32 pc)
 {
   *valp -= (pc & ~0x3);
@@ -2540,6 +2647,22 @@ static xtensa_operand_internal operands[] = {
     XTENSA_OPERAND_IS_PCRELATIVE,
     OperandSem_opnd_sem_xt_wbr18_label_encode, OperandSem_opnd_sem_xt_wbr18_label_decode,
     Operand_xt_wbr18_label_ator, Operand_xt_wbr18_label_rtoa },
+  { "opnd_WR_MASK_GPIO_OUT_mask", FIELD_fld_WR_MASK_GPIO_OUT_mask, REGFILE_AR, 1,
+    XTENSA_OPERAND_IS_REGISTER,
+    OperandSem_opnd_sem_AR_encode, OperandSem_opnd_sem_AR_decode,
+    0, 0 },
+  { "opnd_WR_MASK_GPIO_OUT_value", FIELD_fld_WR_MASK_GPIO_OUT_value, REGFILE_AR, 1,
+    XTENSA_OPERAND_IS_REGISTER,
+    OperandSem_opnd_sem_AR_encode, OperandSem_opnd_sem_AR_decode,
+    0, 0 },
+  { "opnd_SET_BIT_GPIO_OUT_mask", FIELD_fld_SET_BIT_GPIO_OUT_mask, -1, 0,
+    0,
+    OperandSem_opnd_sem_opnd_SET_BIT_GPIO_OUT_mask_encode, OperandSem_opnd_sem_opnd_SET_BIT_GPIO_OUT_mask_decode,
+    0, 0 },
+  { "opnd_CLR_BIT_GPIO_OUT_mask", FIELD_fld_CLR_BIT_GPIO_OUT_mask, -1, 0,
+    0,
+    OperandSem_opnd_sem_opnd_SET_BIT_GPIO_OUT_mask_encode, OperandSem_opnd_sem_opnd_SET_BIT_GPIO_OUT_mask_decode,
+    0, 0 },
   { "opnd_GET_GPIO_IN_I", FIELD_fld_GET_GPIO_IN_I, REGFILE_AR, 1,
     XTENSA_OPERAND_IS_REGISTER,
     OperandSem_opnd_sem_AR_encode, OperandSem_opnd_sem_AR_decode,
@@ -2576,7 +2699,12 @@ static xtensa_operand_internal operands[] = {
   { "imm7", FIELD_imm7, -1, 0, 0, 0, 0, 0, 0 },
   { "xt_wbr15_imm", FIELD_xt_wbr15_imm, -1, 0, 0, 0, 0, 0, 0 },
   { "xt_wbr18_imm", FIELD_xt_wbr18_imm, -1, 0, 0, 0, 0, 0, 0 },
+  { "fld_WR_MASK_GPIO_OUT_mask", FIELD_fld_WR_MASK_GPIO_OUT_mask, -1, 0, 0, 0, 0, 0, 0 },
+  { "fld_WR_MASK_GPIO_OUT_value", FIELD_fld_WR_MASK_GPIO_OUT_value, -1, 0, 0, 0, 0, 0, 0 },
+  { "fld_SET_BIT_GPIO_OUT_mask", FIELD_fld_SET_BIT_GPIO_OUT_mask, -1, 0, 0, 0, 0, 0, 0 },
   { "fld_Inst_3_0", FIELD_fld_Inst_3_0, -1, 0, 0, 0, 0, 0, 0 },
+  { "fld_Inst_23_12", FIELD_fld_Inst_23_12, -1, 0, 0, 0, 0, 0, 0 },
+  { "fld_CLR_BIT_GPIO_OUT_mask", FIELD_fld_CLR_BIT_GPIO_OUT_mask, -1, 0, 0, 0, 0, 0, 0 },
   { "fld_Inst_23_8", FIELD_fld_Inst_23_8, -1, 0, 0, 0, 0, 0, 0 },
   { "fld_GET_GPIO_IN_I", FIELD_fld_GET_GPIO_IN_I, -1, 0, 0, 0, 0, 0, 0 }
 };
@@ -2625,6 +2753,10 @@ enum xtensa_operand_id {
   OPERAND_tp7,
   OPERAND_xt_wbr15_label,
   OPERAND_xt_wbr18_label,
+  OPERAND_opnd_WR_MASK_GPIO_OUT_mask,
+  OPERAND_opnd_WR_MASK_GPIO_OUT_value,
+  OPERAND_opnd_SET_BIT_GPIO_OUT_mask,
+  OPERAND_opnd_CLR_BIT_GPIO_OUT_mask,
   OPERAND_opnd_GET_GPIO_IN_I,
   OPERAND_t,
   OPERAND_bbi4,
@@ -2658,7 +2790,12 @@ enum xtensa_operand_id {
   OPERAND_imm7,
   OPERAND_xt_wbr15_imm,
   OPERAND_xt_wbr18_imm,
+  OPERAND_fld_WR_MASK_GPIO_OUT_mask,
+  OPERAND_fld_WR_MASK_GPIO_OUT_value,
+  OPERAND_fld_SET_BIT_GPIO_OUT_mask,
   OPERAND_fld_Inst_3_0,
+  OPERAND_fld_Inst_23_12,
+  OPERAND_fld_CLR_BIT_GPIO_OUT_mask,
   OPERAND_fld_Inst_23_8,
   OPERAND_fld_GET_GPIO_IN_I
 };
@@ -4607,6 +4744,31 @@ static xtensa_interface Iclass_xt_iclass_wer_intfArgs[] = {
   INTERFACE_ERI_WR_Out
 };
 
+static xtensa_arg_internal Iclass_WR_MASK_GPIO_OUT_args[] = {
+  { { OPERAND_opnd_WR_MASK_GPIO_OUT_value }, 'i' },
+  { { OPERAND_opnd_WR_MASK_GPIO_OUT_mask }, 'i' }
+};
+
+static xtensa_arg_internal Iclass_WR_MASK_GPIO_OUT_stateArgs[] = {
+  { { STATE_GPIO_OUT }, 'm' }
+};
+
+static xtensa_arg_internal Iclass_SET_BIT_GPIO_OUT_args[] = {
+  { { OPERAND_opnd_SET_BIT_GPIO_OUT_mask }, 'i' }
+};
+
+static xtensa_arg_internal Iclass_SET_BIT_GPIO_OUT_stateArgs[] = {
+  { { STATE_GPIO_OUT }, 'm' }
+};
+
+static xtensa_arg_internal Iclass_CLR_BIT_GPIO_OUT_args[] = {
+  { { OPERAND_opnd_CLR_BIT_GPIO_OUT_mask }, 'i' }
+};
+
+static xtensa_arg_internal Iclass_CLR_BIT_GPIO_OUT_stateArgs[] = {
+  { { STATE_GPIO_OUT }, 'm' }
+};
+
 static xtensa_arg_internal Iclass_GET_GPIO_IN_args[] = {
   { { OPERAND_opnd_GET_GPIO_IN_I }, 'o' }
 };
@@ -5158,6 +5320,12 @@ static xtensa_iclass_internal iclasses[] = {
     1, Iclass_xt_iclass_rer_stateArgs, 2, Iclass_xt_iclass_rer_intfArgs },
   { 2, Iclass_xt_iclass_wer_args,
     1, Iclass_xt_iclass_wer_stateArgs, 2, Iclass_xt_iclass_wer_intfArgs },
+  { 2, Iclass_WR_MASK_GPIO_OUT_args,
+    1, Iclass_WR_MASK_GPIO_OUT_stateArgs, 0, 0 },
+  { 1, Iclass_SET_BIT_GPIO_OUT_args,
+    1, Iclass_SET_BIT_GPIO_OUT_stateArgs, 0, 0 },
+  { 1, Iclass_CLR_BIT_GPIO_OUT_args,
+    1, Iclass_CLR_BIT_GPIO_OUT_stateArgs, 0, 0 },
   { 1, Iclass_GET_GPIO_IN_args,
     0, 0, 1, Iclass_GET_GPIO_IN_intfArgs },
   { 1, Iclass_rur_gpio_out_args,
@@ -5430,6 +5598,9 @@ enum xtensa_iclass_id {
   ICLASS_xt_iclass_xsr_eraccess,
   ICLASS_xt_iclass_rer,
   ICLASS_xt_iclass_wer,
+  ICLASS_WR_MASK_GPIO_OUT,
+  ICLASS_SET_BIT_GPIO_OUT,
+  ICLASS_CLR_BIT_GPIO_OUT,
   ICLASS_GET_GPIO_IN,
   ICLASS_rur_gpio_out,
   ICLASS_wur_gpio_out
@@ -7347,9 +7518,27 @@ Opcode_wer_Slot_inst_encode (xtensa_insnbuf slotbuf)
 }
 
 static void
-Opcode_get_gpio_in_Slot_inst_encode (xtensa_insnbuf slotbuf)
+Opcode_wr_mask_gpio_out_Slot_inst_encode (xtensa_insnbuf slotbuf)
+{
+  slotbuf[0] = 0x62000;
+}
+
+static void
+Opcode_set_bit_gpio_out_Slot_inst_encode (xtensa_insnbuf slotbuf)
+{
+  slotbuf[0] = 0x61000;
+}
+
+static void
+Opcode_clr_bit_gpio_out_Slot_inst_encode (xtensa_insnbuf slotbuf)
 {
   slotbuf[0] = 0x60000;
+}
+
+static void
+Opcode_get_gpio_in_Slot_inst_encode (xtensa_insnbuf slotbuf)
+{
+  slotbuf[0] = 0x63000;
 }
 
 static void
@@ -8636,6 +8825,18 @@ xtensa_opcode_encode_fn Opcode_wer_encode_fns[] = {
   Opcode_wer_Slot_inst_encode, 0, 0
 };
 
+xtensa_opcode_encode_fn Opcode_wr_mask_gpio_out_encode_fns[] = {
+  Opcode_wr_mask_gpio_out_Slot_inst_encode, 0, 0
+};
+
+xtensa_opcode_encode_fn Opcode_set_bit_gpio_out_encode_fns[] = {
+  Opcode_set_bit_gpio_out_Slot_inst_encode, 0, 0
+};
+
+xtensa_opcode_encode_fn Opcode_clr_bit_gpio_out_encode_fns[] = {
+  Opcode_clr_bit_gpio_out_Slot_inst_encode, 0, 0
+};
+
 xtensa_opcode_encode_fn Opcode_get_gpio_in_encode_fns[] = {
   Opcode_get_gpio_in_Slot_inst_encode, 0, 0
 };
@@ -9618,6 +9819,15 @@ static xtensa_opcode_internal opcodes[] = {
   { "wer", ICLASS_xt_iclass_wer,
     0,
     Opcode_wer_encode_fns, 0, 0 },
+  { "wr_mask_gpio_out", ICLASS_WR_MASK_GPIO_OUT,
+    0,
+    Opcode_wr_mask_gpio_out_encode_fns, 0, 0 },
+  { "set_bit_gpio_out", ICLASS_SET_BIT_GPIO_OUT,
+    0,
+    Opcode_set_bit_gpio_out_encode_fns, 0, 0 },
+  { "clr_bit_gpio_out", ICLASS_CLR_BIT_GPIO_OUT,
+    0,
+    Opcode_clr_bit_gpio_out_encode_fns, 0, 0 },
   { "get_gpio_in", ICLASS_GET_GPIO_IN,
     0,
     Opcode_get_gpio_in_encode_fns, 0, 0 },
@@ -9948,6 +10158,9 @@ enum xtensa_opcode_id {
   OPCODE_XSR_ERACCESS,
   OPCODE_RER,
   OPCODE_WER,
+  OPCODE_WR_MASK_GPIO_OUT,
+  OPCODE_SET_BIT_GPIO_OUT,
+  OPCODE_CLR_BIT_GPIO_OUT,
   OPCODE_GET_GPIO_IN,
   OPCODE_RUR_GPIO_OUT,
   OPCODE_WUR_GPIO_OUT
@@ -9959,7 +10172,16 @@ enum xtensa_opcode_id {
 static int
 Slot_inst_decode (const xtensa_insnbuf insn)
 {
-  if (Field_fld_inst_23_8_Slot_inst_get (insn) == 1536 &&
+  if (Field_fld_inst_23_12_Slot_inst_get (insn) == 96 &&
+      Field_fld_inst_3_0_Slot_inst_get (insn) == 0)
+    return OPCODE_CLR_BIT_GPIO_OUT;
+  if (Field_fld_inst_23_12_Slot_inst_get (insn) == 97 &&
+      Field_fld_inst_3_0_Slot_inst_get (insn) == 0)
+    return OPCODE_SET_BIT_GPIO_OUT;
+  if (Field_fld_inst_23_12_Slot_inst_get (insn) == 98 &&
+      Field_fld_inst_3_0_Slot_inst_get (insn) == 0)
+    return OPCODE_WR_MASK_GPIO_OUT;
+  if (Field_fld_inst_23_8_Slot_inst_get (insn) == 1584 &&
       Field_fld_inst_3_0_Slot_inst_get (insn) == 0)
     return OPCODE_GET_GPIO_IN;
   if (Field_op0_Slot_inst_get (insn) == 0)
@@ -10834,7 +11056,12 @@ Slot_inst_get_field_fns[] = {
   0,
   Field_xt_wbr15_imm_Slot_inst_get,
   Field_xt_wbr18_imm_Slot_inst_get,
+  Field_fld_wr_mask_gpio_out_mask_Slot_inst_get,
+  Field_fld_wr_mask_gpio_out_value_Slot_inst_get,
+  Field_fld_set_bit_gpio_out_mask_Slot_inst_get,
   Field_fld_inst_3_0_Slot_inst_get,
+  Field_fld_inst_23_12_Slot_inst_get,
+  Field_fld_clr_bit_gpio_out_mask_Slot_inst_get,
   Field_fld_inst_23_8_Slot_inst_get,
   Field_fld_get_gpio_in_i_Slot_inst_get,
   Implicit_Field_ar0_get,
@@ -10882,7 +11109,12 @@ Slot_inst_set_field_fns[] = {
   0,
   Field_xt_wbr15_imm_Slot_inst_set,
   Field_xt_wbr18_imm_Slot_inst_set,
+  Field_fld_wr_mask_gpio_out_mask_Slot_inst_set,
+  Field_fld_wr_mask_gpio_out_value_Slot_inst_set,
+  Field_fld_set_bit_gpio_out_mask_Slot_inst_set,
   Field_fld_inst_3_0_Slot_inst_set,
+  Field_fld_inst_23_12_Slot_inst_set,
+  Field_fld_clr_bit_gpio_out_mask_Slot_inst_set,
   Field_fld_inst_23_8_Slot_inst_set,
   Field_fld_get_gpio_in_i_Slot_inst_set,
   Implicit_Field_set,
@@ -10928,6 +11160,11 @@ Slot_inst16a_get_field_fns[] = {
   Field_z_Slot_inst16a_get,
   Field_imm6_Slot_inst16a_get,
   Field_imm7_Slot_inst16a_get,
+  0,
+  0,
+  0,
+  0,
+  0,
   0,
   0,
   0,
@@ -10981,6 +11218,11 @@ Slot_inst16a_set_field_fns[] = {
   0,
   0,
   0,
+  0,
+  0,
+  0,
+  0,
+  0,
   Implicit_Field_set,
   Implicit_Field_set,
   Implicit_Field_set,
@@ -11029,6 +11271,11 @@ Slot_inst16b_get_field_fns[] = {
   0,
   0,
   0,
+  0,
+  0,
+  0,
+  0,
+  0,
   Implicit_Field_ar0_get,
   Implicit_Field_ar4_get,
   Implicit_Field_ar8_get,
@@ -11072,6 +11319,11 @@ Slot_inst16b_set_field_fns[] = {
   Field_z_Slot_inst16b_set,
   Field_imm6_Slot_inst16b_set,
   Field_imm7_Slot_inst16b_set,
+  0,
+  0,
+  0,
+  0,
+  0,
   0,
   0,
   0,
@@ -11418,10 +11670,10 @@ xtensa_isa_internal xtensa_modules = {
   3 /* insn_size */, 0,
   3, formats, format_decoder, length_decoder,
   3, slots,
-  44 /* num_fields */,
-  79, operands,
-  266, iclasses,
-  321, opcodes, 0,
+  49 /* num_fields */,
+  88, operands,
+  269, iclasses,
+  324, opcodes, 0,
   1, regfiles,
   NUM_STATES, states, 0,
   NUM_SYSREGS, sysregs, 0,
