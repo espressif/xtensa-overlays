@@ -1,6 +1,6 @@
 /* Customized table mapping between kernel xtregset and GDB register cache.
 
-   Customer ID=13321; Build=0x76b43; Copyright (c) 2007-2010 Tensilica Inc.
+   Customer ID=14525; Build=0x787b1; Copyright (c) 2007-2010 Tensilica Inc.
 
    Permission is hereby granted, free of charge, to any person obtaining
    a copy of this software and associated documentation files (the

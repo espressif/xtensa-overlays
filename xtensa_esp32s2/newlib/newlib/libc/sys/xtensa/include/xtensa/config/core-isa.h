@@ -108,6 +108,8 @@
 #define XCHAL_HAVE_FUSION_VITERBI	0	/* Fusion Viterbi option */
 #define XCHAL_HAVE_FUSION_SOFTDEMAP	0	/* Fusion Soft Bit Demap option */
 #define XCHAL_HAVE_HIFIPRO		0	/* HiFiPro Audio Engine pkg */
+#define XCHAL_HAVE_HIFI5		0	/* HiFi5 Audio Engine pkg */
+#define XCHAL_HAVE_HIFI5_VFPU		0	/* HiFi5 Audio Engine VFPU option */
 #define XCHAL_HAVE_HIFI4		0	/* HiFi4 Audio Engine pkg */
 #define XCHAL_HAVE_HIFI4_VFPU		0	/* HiFi4 Audio Engine VFPU option */
 #define XCHAL_HAVE_HIFI3		0	/* HiFi3 Audio Engine pkg */
@@ -192,42 +194,42 @@
 #define XCHAL_DATA_WIDTH		4	/* data width in bytes */
 #define XCHAL_DATA_PIPE_DELAY		2	/* d-side pipeline delay
 						   (1 = 5-stage, 2 = 7-stage) */
-#define XCHAL_CLOCK_GATING_GLOBAL	1	/* global clock gating */
-#define XCHAL_CLOCK_GATING_FUNCUNIT	1	/* funct. unit clock gating */
+#define XCHAL_CLOCK_GATING_GLOBAL	0	/* global clock gating */
+#define XCHAL_CLOCK_GATING_FUNCUNIT	0	/* funct. unit clock gating */
 /*  In T1050, applies to selected core load and store instructions (see ISA): */
 #define XCHAL_UNALIGNED_LOAD_EXCEPTION	0	/* unaligned loads cause exc. */
 #define XCHAL_UNALIGNED_STORE_EXCEPTION	0	/* unaligned stores cause exc.*/
 #define XCHAL_UNALIGNED_LOAD_HW		1	/* unaligned loads work in hw */
 #define XCHAL_UNALIGNED_STORE_HW	1	/* unaligned stores work in hw*/
 
-#define XCHAL_SW_VERSION		1200008	/* sw version of this header */
+#define XCHAL_SW_VERSION		1200009	/* sw version of this header */
 
-#define XCHAL_CORE_ID			"test_0905_1_TIE_GPIO"	/* alphanum core name
+#define XCHAL_CORE_ID			"esp_core_722_f"	/* alphanum core name
 						   (CoreID) set in the Xtensa
 						   Processor Generator */
 
-#define XCHAL_BUILD_UNIQUE_ID		0x00076B43	/* 22-bit sw build ID */
+#define XCHAL_BUILD_UNIQUE_ID		0x000787B1	/* 22-bit sw build ID */
 
 /*
  *  These definitions describe the hardware targeted by this software.
  */
 #define XCHAL_HW_CONFIGID0		0xC2ECFAFE	/* ConfigID hi 32 bits*/
-#define XCHAL_HW_CONFIGID1		0x22076B43	/* ConfigID lo 32 bits*/
-#define XCHAL_HW_VERSION_NAME		"LX7.0.8"	/* full version name */
+#define XCHAL_HW_CONFIGID1		0x224787B1	/* ConfigID lo 32 bits*/
+#define XCHAL_HW_VERSION_NAME		"LX7.0.9"	/* full version name */
 #define XCHAL_HW_VERSION_MAJOR		2700	/* major ver# of targeted hw */
-#define XCHAL_HW_VERSION_MINOR		8	/* minor ver# of targeted hw */
-#define XCHAL_HW_VERSION		270008	/* major*100+minor */
+#define XCHAL_HW_VERSION_MINOR		9	/* minor ver# of targeted hw */
+#define XCHAL_HW_VERSION		270009	/* major*100+minor */
 #define XCHAL_HW_REL_LX7		1
 #define XCHAL_HW_REL_LX7_0		1
-#define XCHAL_HW_REL_LX7_0_8		1
+#define XCHAL_HW_REL_LX7_0_9		1
 #define XCHAL_HW_CONFIGID_RELIABLE	1
 /*  If software targets a *range* of hardware versions, these are the bounds: */
 #define XCHAL_HW_MIN_VERSION_MAJOR	2700	/* major v of earliest tgt hw */
-#define XCHAL_HW_MIN_VERSION_MINOR	8	/* minor v of earliest tgt hw */
-#define XCHAL_HW_MIN_VERSION		270008	/* earliest targeted hw */
+#define XCHAL_HW_MIN_VERSION_MINOR	9	/* minor v of earliest tgt hw */
+#define XCHAL_HW_MIN_VERSION		270009	/* earliest targeted hw */
 #define XCHAL_HW_MAX_VERSION_MAJOR	2700	/* major v of latest tgt hw */
-#define XCHAL_HW_MAX_VERSION_MINOR	8	/* minor v of latest tgt hw */
-#define XCHAL_HW_MAX_VERSION		270008	/* latest targeted hw */
+#define XCHAL_HW_MAX_VERSION_MINOR	9	/* minor v of latest tgt hw */
+#define XCHAL_HW_MAX_VERSION		270009	/* latest targeted hw */
 
 
 /*----------------------------------------------------------------------
