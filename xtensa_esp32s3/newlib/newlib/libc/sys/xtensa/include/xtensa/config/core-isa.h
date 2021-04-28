@@ -7,7 +7,7 @@
 
 /* Xtensa processor core configuration information.
 
-   Copyright (c) 1999-2020 Tensilica Inc.
+   Copyright (c) 1999-2021 Tensilica Inc.
 
    Permission is hereby granted, free of charge, to any person obtaining
    a copy of this software and associated documentation files (the
@@ -206,17 +206,17 @@
 
 #define XCHAL_SW_VERSION		1200012	/* sw version of this header */
 
-#define XCHAL_CORE_ID			"LX7_ESP32_S3"	/* alphanum core name
+#define XCHAL_CORE_ID			"LX7_ESP32_S3_MP"	/* alphanum core name
 						   (CoreID) set in the Xtensa
 						   Processor Generator */
 
-#define XCHAL_BUILD_UNIQUE_ID		0x00088EF1	/* 22-bit sw build ID */
+#define XCHAL_BUILD_UNIQUE_ID		0x00090F1F	/* 22-bit sw build ID */
 
 /*
  *  These definitions describe the hardware targeted by this software.
  */
 #define XCHAL_HW_CONFIGID0		0xC2F0FFFE	/* ConfigID hi 32 bits*/
-#define XCHAL_HW_CONFIGID1		0x23088EF1	/* ConfigID lo 32 bits*/
+#define XCHAL_HW_CONFIGID1		0x23090F1F	/* ConfigID lo 32 bits*/
 #define XCHAL_HW_VERSION_NAME		"LX7.0.12"	/* full version name */
 #define XCHAL_HW_VERSION_MAJOR		2700	/* major ver# of targeted hw */
 #define XCHAL_HW_VERSION_MINOR		12	/* minor ver# of targeted hw */

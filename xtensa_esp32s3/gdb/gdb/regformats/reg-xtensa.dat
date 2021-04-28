@@ -84,7 +84,6 @@ expedite:pc,windowbase,windowstart
 32:m2
 32:m3
 32:gpio_out
-32:sar_byte
 32:f0
 32:f1
 32:f2
@@ -115,9 +114,17 @@ expedite:pc,windowbase,windowstart
 32:qacc_l_2
 32:qacc_l_3
 32:qacc_l_4
+32:sar_byte
+32:fft_bit_width
+32:ua_state_0
+32:ua_state_1
+32:ua_state_2
+32:ua_state_3
 128:q0
 128:q1
 128:q2
 128:q3
 128:q4
 128:q5
+128:q6
+128:q7
